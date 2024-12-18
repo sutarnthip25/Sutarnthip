@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="AddPD.css" rel="stylesheet"> 
+</head>
+
+<body>
+    <div class="container" style="display: flex; flex-direction: column; row-gap: 4px; margin-bottom: 10%;">
+        <div class="head-text">
+            <h2 >Add Product</h2>
+        </div>
+        <form class="product-form" enctype="multipart/form-data">
+            <div class="form-fields">
+                <label style="margin-bottom: 5%;">SKU:
+                    <input id="PDSKU" name="PDSKU" type="text" placeholder="Enter SKU"></label>
+                <label style="margin-bottom: 5%;">Name:
+                    <input id="PDName" name="PDName" type="text" placeholder="Enter Name"></label>
+                <label style="margin-bottom: 5%;">Price:
+                    <input id="PDPrice" type="number" name="PDPrice" placeholder="Enter Price"></label>
+                <label>Status:</label>
+                <div class="status-container">
+                <input type="radio" id="status-active" name="status" value="active">
+                <label for="status-active">Active</label>
+        
+                <input type="radio" id="status-inactive" name="status" value="inactive">
+                <label for="status-inactive">Inactive</label>
+                </div>
+            </div>
+            <div class="buttons" style="margin-top: 10%; margin-left: 75%;">
+                <button type="button" class="save-btn" id="addbutton">Add</button>
+                <a href="/todolist"><button type="button" class="return-btn">Return</button></a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('addbutton').addEventListener('click', function () {
+            // ดึงข้อมูลจากฟอร์ม
+            const PDSKU = document.getElementById('PDSKU').value;
+            const PDName = document.getElementById('PDName').value;
+            const PDPrice = document.getElementById('PDPrice').value;
+            const status = document.querySelector('input[name="status"]:checked')?.value;
+        
+            // ตรวจสอบข้อมูลก่อนส่ง
+            if (!PDSKU || !PDName || !PDPrice || !status) {
+                alert('กรุณากรอกข้อมูลให้ครบทุกช่อง');
+                return;
+            }
+        
+            // ส่งข้อมูลไปยัง Backend
+            fetch('http://localhost:3000/api/add-product', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ PDSKU, PDName, PDPrice, status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Product added successfully!');
+                // เคลียร์ข้อมูลในฟอร์ม
+                document.querySelector('.product-form').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to add product');
+            });
+        });
+        </script>
+        
+</body>
+
+</html>

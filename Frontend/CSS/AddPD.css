@@ -1,0 +1,233 @@
+/* รีเซ็ตค่าพื้นฐาน */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* สไตล์สำหรับ body */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* จัดหัวข้อ Add Product */
+.head-text {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #EB6B0A;
+}
+
+/* ฟอร์มหลัก */
+.product-form {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    width: 50%;
+    margin: auto;
+}
+
+/* จัดการช่องข้อมูล */
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #EB6B0A;
+    outline: none;
+}
+
+/* จัดการ Status Radio Buttons */
+label[style*="align-items: center"] {
+    gap: 10px;
+}
+
+.status-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.status {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.status.active {
+    background-color: #79D684;
+    border-color: #79D684;
+}
+
+.status.inactive {
+    background-color: #EC918E;
+    border-color: #EC918E;
+}
+
+/* จัดการปุ่ม */
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.save-btn {
+    background-color: #EB6B0A;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #d95e07;
+}
+
+.return-btn {
+    background-color: white;
+    border: 2px solid #EB6B0A;
+    color: #EB6B0A;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.return-btn:hover {
+    background-color: #EB6B0A;
+    color: white;
+}
+
+/* Responsive Design with Media Queries */
+
+/* เมื่อขนาดหน้าจอเล็กกว่า 768px (แท็บเล็ตและมือถือ) */
+@media screen and (max-width: 768px) {
+    /* ฟอร์ม */
+    .product-form {
+        width: 90%; /* กำหนดความกว้างให้ยืดหยุ่นขึ้น */
+        padding: 15px;
+    }
+
+    /* ปรับขนาดของหัวข้อ */
+    .head-text {
+        font-size: 1.5rem;
+        margin-top: 10%;
+    }
+
+    /* ช่องกรอกข้อมูล */
+    input[type="text"],
+    input[type="number"] {
+        width: 100%; /* ให้ช่องกรอกข้อมูลเต็มความกว้าง */
+    }
+
+    /* จัดการปุ่ม */
+    .buttons {
+        flex-direction: column; /* วางปุ่มเป็นแนวตั้ง */
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+    }
+
+    .save-btn,
+    .return-btn {
+        width: 100%; /* กำหนดให้ปุ่มมีความกว้างเต็ม */
+    }
+
+    /* ปรับระยะห่างของช่องกรอกข้อมูล */
+    .form-fields {
+        gap: 10px;
+    }
+
+    /* ปรับขนาดของปุ่ม */
+    .save-btn {
+        font-size: 1.1rem;
+        padding: 10px 14px;
+    }
+
+    .return-btn {
+        font-size: 1.1rem;
+        padding: 10px 14px;
+    }
+
+    /* ปรับช่อง status */
+    .status-container {
+        flex-direction: column; /* เปลี่ยนทิศทางเป็นแนวตั้ง */
+        align-items: flex-start;
+    }
+}
+
+/* สำหรับหน้าจอที่เล็กกว่าหรือเท่ากับ 480px (มือถือขนาดเล็ก) */
+@media screen and (max-width: 480px) {
+    /* ฟอร์ม */
+    .product-form {
+        width: 95%;
+        padding: 10px;
+    }
+
+    /* ปรับขนาดของหัวข้อ */
+    .head-text {
+        font-size: 1.3rem;
+    }
+
+    /* ปรับขนาดช่องกรอกข้อมูล */
+    input[type="text"],
+    input[type="number"] {
+        font-size: 0.9rem;
+    }
+
+    /* จัดการปุ่ม */
+    .save-btn,
+    .return-btn {
+        font-size: 1rem;
+        padding: 8px 12px;
+    }
+
+    /* ปรับระยะห่างของช่องกรอกข้อมูล */
+    .form-fields {
+        gap: 8px;
+    }
+
+    /* ปรับขนาดของปุ่ม */
+    .save-btn {
+        font-size: 1rem;
+    }
+
+    .return-btn {
+        font-size: 1rem;
+    }
+}

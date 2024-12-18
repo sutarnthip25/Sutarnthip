@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!--bootstrap-->
+    <link href="EditPD.css" rel="stylesheet"> 
+</head>
+
+<body>
+
+    <div class="container" style="display: flex; flex-direction: column; row-gap: 4px; margin-bottom: 10%;">
+        <div class="head-text">
+            <h2 style="color: #EB6B0A;">Edit Product</h2>
+        </div>
+        <form class="product-form" id="product-form" name="product-form">
+            <div class="form-fields">
+                <input type="hidden" id="PDSKU" name="PDSKU">
+        
+                <label for="PDName">Name:</label>
+                <input id="PDName" name="PDName" type="text" placeholder="Enter Name">
+        
+                <label for="PDPrice">Price:</label>
+                <input id="PDPrice" type="number" placeholder="Enter Price" name="PDPrice">
+                
+                <label>Status:</label>
+                <div class="status-container">
+                <input type="radio" id="status-active" name="status" value="active">
+                <label for="status-active">Active</label>
+        
+                <input type="radio" id="status-inactive" name="status" value="inactive">
+                <label for="status-inactive">Inactive</label>
+                </div>
+            </div>
+            <div class="buttons" style="margin-top: 10%; margin-left: 75%;">
+                <button type="submit" class="save-btn">Save</button>
+                <a href="/todolist"><button type="button" class="return-btn">Return</button></a>
+            </div>
+        </form>
+        
+    </div>
+
+    <script>
+async function fetchProductData() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const PDSKU = urlParams.get('sku');
+        const response = await fetch(`http://localhost:3000/product/${PDSKU}`);
+        if (response.ok) {
+            const ProductData = await response.json();
+            console.log(ProductData);
+
+            // ตรวจสอบและตั้งค่า value
+            document.getElementById('PDSKU').value = ProductData.SKU || ''; // ตั้งค่า PDSKU
+            document.getElementById('PDName').value = ProductData.Name || '';
+            document.getElementById('PDPrice').value = ProductData.Price || '';
+
+            // ตั้งค่า status
+            const statusActive = document.getElementById('status-active');
+            const statusInactive = document.getElementById('status-inactive');
+            if (ProductData.status === 'active') {
+                statusActive.checked = true;
+            } else if (ProductData.status === 'inactive') {
+                statusInactive.checked = true;
+            }
+        } else {
+            alert('Failed to fetch product data');
+        }
+    } catch (error) {
+        console.error('Error fetching product data:', error);
+    }
+}
+
+window.addEventListener('DOMContentLoaded', fetchProductData);
+
+const form = document.getElementById('product-form');
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const productData = {};
+    for (let [key, value] of formData.entries()) {
+        productData[key] = value;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/update_product/${productData.PDSKU}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(productData),
+        });
+
+        if (response.ok) {
+            alert('Product data updated successfully!');
+            window.location.href = '/todolist';
+        } else {
+            alert('Failed to update product data');
+        }
+    } catch (error) {
+        console.error('Error updating product data:', error);
+    }
+});
+    </script>
+</body>
+
+</html>

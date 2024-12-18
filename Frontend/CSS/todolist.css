@@ -1,0 +1,165 @@
+/* main */
+.main-content {
+    margin-left: 60px;
+    margin-top: 20px;
+}
+
+/* add+save */
+.PDactions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.add-button {
+    background-color: #EB6B0A;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+}
+.add-button:hover {
+    transform: scale(1.1)
+}
+.save-button {
+    background-color: white;
+    border: 2px solid #EB6B0A;
+    color: #EB6B0A;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+/* end add+save */
+
+/* PDinfo */
+#PDtableheader th {
+    background-color: #FDEFE7;
+    color: #EB6B0A;
+    font-weight: 600;
+    height: 40px;
+    margin: 0;
+    text-align: left;
+    padding-right: 40px;
+}
+
+#PDtableheader #status {
+    padding-left: 2%;
+}
+
+#PDtablebody td {
+    padding-right: 40px;
+    text-align: left;
+}
+
+button {
+    border: none;
+    background-color: white;
+}
+
+.edit-button img, .delete-button img {
+    width: 25px;
+    height: auto;
+    margin: 20px;
+    border: none;
+}
+
+.status {
+    display: inline-block;
+    margin-left: 65%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.status.active {
+    background-color: #79D684;
+}
+
+.status.inactive {
+    background-color: #EC918E;
+}
+
+.edit-button:hover {
+    transform: scale(1.1)
+}
+.delete-button:hover {
+    transform: scale(1.1)
+}
+/* end PDinfo */
+
+/* Responsive Design with Media Queries */
+
+/* เมื่อหน้าจอขนาดเล็กกว่า 768px (เช่น โทรศัพท์มือถือหรือแท็บเล็ต) */
+@media screen and (max-width: 768px) {
+    /* ลดขนาดของ main-content */
+    .main-content {
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+
+    /* จัดระเบียบ PDactions ให้ดีขึ้น */
+    .PDactions {
+        flex-direction: column; /* วางปุ่ม add และ save ในแนวตั้ง */
+        align-items: center;
+    }
+
+    .add-button, .save-button {
+        width: 100%; /* กำหนดให้ปุ่มมีความกว้างเต็ม */
+        margin: 5px 0;
+    }
+
+    /* ปรับขนาดตาราง PDtable */
+    #PDtableheader th {
+        font-size: 0.9rem; /* ปรับขนาดฟอนต์ */
+        padding-right: 10px; /* ลดระยะห่าง */
+    }
+
+    #PDtablebody td {
+        padding-right: 10px; /* ลดระยะห่าง */
+    }
+
+    .status {
+        margin-left: 50%; /* ปรับตำแหน่งของสถานะ */
+    }
+
+    .edit-button img, .delete-button img {
+        width: 20px; /* ลดขนาดของไอคอน */
+        margin: 10px;
+    }
+}
+
+/* สำหรับหน้าจอที่เล็กกว่าหรือเท่ากับ 480px (มือถือขนาดเล็ก) */
+@media screen and (max-width: 480px) {
+    /* ลดขนาดของ main-content */
+    .main-content {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    /* จัดการกับ PDactions */
+    .PDactions {
+        gap: 5px; /* ลดช่องว่างระหว่างปุ่ม */
+    }
+
+    .add-button, .save-button {
+        width: 100%;
+        padding: 8px;
+    }
+
+    /* ปรับขนาดตาราง */
+    #PDtableheader th {
+        font-size: 0.8rem; /* ปรับขนาดฟอนต์ */
+        padding-right: 5px; /* ลดระยะห่าง */
+    }
+
+    #PDtablebody td {
+        padding-right: 5px; /* ลดระยะห่าง */
+    }
+
+    .status {
+        margin-left: 40%; /* ปรับตำแหน่งสถานะ */
+    }
+
+    .edit-button img, .delete-button img {
+        width: 18px; /* ลดขนาดของไอคอน */
+        margin: 5px;
+    }
+}
